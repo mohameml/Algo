@@ -31,22 +31,7 @@ $$
 
 - équation de bellman dans le pb de sac à dos :
 
-    * soit n le nombre d'objets 
-
-    * $(u_i)_{i \in [1,n]}$ les utilités des objets  et $(v_i)_{i \in [1,n]}$ leures volumes .
-
-    * On note $\Phi(n,V)$ l'utilité maximale d'un sac de volume V qu'on peut remplir avec les objets 1 à n.
-
-    Donc ona :
-
-    $$
-    \Phi(n,v) = ~~ 
-
-    \begin{align}
-    max(u_n + \Phi(n-1, V-v_n) , \Phi(n-1,V))~~~si~~v_n~\leq V \\
-    \Phi(V,n-1) ~~~si~~non
-    \end{align}
-    $$
+![équation de bellman](eq_bellman.jpeg)
 
 
 ### 3. Algo de résolution
