@@ -10,6 +10,8 @@
 
 - L'objectif est de déterminer la meilleure combinaison d'objets à placer dans le sac de manière à maximiser la valeur totale, tout en respectant la capacité de poids maximale du sac.
 
+#### RQ :
+Dans le problème du sac à dos binaire on peut prendre un objet une seule fois
 
 - **écriture mathématique du pb :** 
 
@@ -31,89 +33,290 @@ $$
 
 - équation de bellman dans le pb de sac à dos :
 
-![équation de bellman](eq_bellman.jpeg)
+![équation de bellman](images/eq_bellman.jpeg)
+
+
+### 3. Prog. récursif naïf :
+
+- **Programme en Python :**
+
+```python
+
+def sacmax(n,V,tab_v,tab_u):
+
+    utilité_max = 0 
+
+    if n==0 :
+        utilité_max = 0 
+    elif tab_v[n-1] <= V :
+
+        max1 = tab_u[n-1] + sacmax(n-1,V-tab_v[n-1],tab_v,tab_u)
+        max2 = sacmax(n-1,V,tab_v,tab_u)
+
+        if max1 > max2 :
+            utilité_max = max1 
+        else :
+            utilité_max = max2 
+    else :
+        utilité_max = sacmax(n-1,V,tab_v,tab_u)
+
+
+    return utilité_max
+
+
+
+```
+
+- **Compléxité:**
+
+    * La complexité temporelle de l'algorithme  est exponentielle en fonction du nombre d'objets à considérer : $T(n)=\Theta(2^{n})$
+
+    * En effet :
+
+        * Cette complexité est due à la nature récursive de l'algorithme, qui examine toutes les combinaisons possibles d'inclusion et d'exclusion d'objets.
+
+        * l'algorithme explore deux choix possibles (inclusion ou exclusion) pour chaque objet, et cela se fait récursivement pour chaque sous-problème jusqu'à ce que toutes les combinaisons possibles aient été explorées.
+
+
+
+.
+
 
 
 ### 3. Algo de résolution
 
-### 4. Compléxite et localité 
+#### 3.1. Méthode de  Mémoïsation (top_down) :
+
+- **Programme en Python :**
+
+```python
+
+def sacmax_memo(n,V,tab_v,tab_u):
+
+    memo = [[-1 for _ in range(V)] for _ in range(n)]
 
 
+    def sacmax(n,V,tab_v,tab_u):
+
+        
+        if memo[n-1][V-1]!=-1:
+
+            # ce deja calclué 
+            return memo[n-1][V-1]
+        else :
+
+            # donc c'est pas calculée 
+
+            utilité_max = 0 
+
+            if n==0 :
+                utilité_max = 0 
+
+            elif tab_v[n-1] <= V :
+
+                max1 = tab_u[n-1] + sacmax(n-1,V-tab_v[n-1],tab_v,tab_u)
+                max2 = sacmax(n-1,V,tab_v,tab_u)
+
+                if max1 > max2 :
+                    utilité_max = max1 
+                else :
+                    utilité_max = max2 
+            else :
+                utilité_max = sacmax(n-1,V,tab_v,tab_u)
+
+            memo[n-1][V-1]=utilité_max
+
+        return utilité_max 
 
 
-
-
-**Problème du sac à dos (0/1 Knapsack Problem) :**
-
-
-**Équation de Bellman :**
-L'équation de Bellman est la base de la programmation dynamique pour résoudre le problème du sac à dos. Elle est formulée comme suit :
+    return sacmax(n,V,tab_v,tab_u) 
 
 ```
-DP[i][w] = max(DP[i-1][w], DP[i-1][w - wi] + vi)
+
+
+- **Mémoïsation avec choix optimaux :**
+
+#### Méthode 1 :
+```python
+
+
+"-------------------    Méthode 1 ----------------------------"
+
+def sac_max_memo_choix_optimaux(n,V,tab_v,tab_u):
+
+
+    memo = {} 
+    # dictionnaire de clés (n,V) avec n le nombre d'objets et V le volume de sac 
+    # tq : memo[(n,V)]= (nb_max , list_objets_de_choix)
+
+
+    def sac_max(n,V):
+
+        if n==0 :
+            return 0,[]
+        
+        else :
+
+            if (n,V) in memo :
+
+                return memo[(n,V)]
+
+            if tab_v[n-1]<= V :
+
+                val_max1 , choix1 = sac_max(n-1,V-tab_v[n-1])
+                val_max2 , choix2 = sac_max(n-1,V)
+
+                if val_max1 + tab_u[n-1] > val_max2 :
+                    val_max = val_max1 + tab_u[n-1]
+                    choix = choix1 + [n-1]
+                else :
+
+                    val_max =val_max2
+                    choix = choix2
+            else :
+                val_max , choix = sac_max(n-1,V)
+
+        
+            memo[(n,V)] = (val_max,choix)
+            
+            return val_max , choix
+    sac_max(n,V) 
+
+    return memo[(n,V)]
+
+
+
 ```
 
-où :
-- DP[i][w] représente la valeur maximale pouvant être obtenue en utilisant les i premiers objets et en ayant une capacité maximale de poids w.
-- DP[i-1][w] est la valeur maximale obtenue sans inclure le i-ème objet.
-- DP[i-1][w - wi] + vi est la valeur maximale obtenue en incluant le i-ème objet.
+#### Méthode 2 :
 
-**Résolution en Bottom-up :**
-La résolution du problème du sac à dos en utilisant une approche bottom-up implique la création d'un tableau (généralement une matrice) pour stocker les résultats intermédiaires et la résolution progressive des sous-problèmes. Voici un exemple en Python :
+```python
+
+
+def sacmax_memo_choix_optimaux(n,V,tab_v,tab_u):
+
+    memo = [[-1 for _ in range(V)] for _ in range(n)]
+
+    def sacmax(n,V,tab_v,tab_u):
+
+         
+
+        if memo[n-1][V-1]!=-1:
+
+            # ce deja calclué 
+            return memo[n-1][V-1]
+        else :
+
+            # donc c'est pas calculée 
+
+            utilité_max = 0 
+
+            if n==0 :
+                utilité_max = 0 
+
+            elif tab_v[n-1] <= V :
+
+                max1 = tab_u[n-1] + sacmax(n-1,V-tab_v[n-1],tab_v,tab_u)
+                max2 = sacmax(n-1,V,tab_v,tab_u)
+
+                if max1 > max2 :
+                    utilité_max = max1
+            
+                    
+                else :
+                    utilité_max = max2 
+                    
+            else :
+                utilité_max = sacmax(n-1,V,tab_v,tab_u)
+                
+
+            memo[n-1][V-1]=utilité_max
+
+             
+
+        return utilité_max 
+
+
+
+    sacmax(n,V,tab_v,tab_u)
+
+    
+
+    # Reconstruction de la liste des objets choisis pour obtenir la valeur maximale.
+    choix = [0 for _ in range(n)]
+    i, w = n-1, V-1 
+    while i >= 0 and w >= 0:
+        if memo[i][w] != memo[i - 1][w]:
+            choix[i]=1
+            w -= tab_v[i]
+        i -= 1
+
+
+    return choix
+
+```
+
+- **Complexité :**
+
+    * La complexité temporelle de cet algorithme est de l'ordre de O(n*V), où "n" est le nombre d'objets à considérer et "V" est la capacité maximale du sac à dos.
+
+    * La mémoïsation permet d'éviter le recalcul des mêmes sous-problèmes, car les résultats sont stockés dans la matrice `memo`. Ainsi, chaque sous-problème est calculé une seule fois, ce qui réduit considérablement le nombre total d'opérations nécessaires pour résoudre le problème.
+
+
+
+
+#### 3.2  Méthode Bottom-up :
+
+
+- **Analyse dépendances :**
+Dans l'algo de Bottom-up il faut d'abord faire l'analyse de dépendeces pour trouver un order toplogique 
+
+![analyse](images/analyse.jpeg)
+
+
+- **Programme en Python :**
 
 ```python
 def knapsack_bottom_up(values, weights, W):
     n = len(values)
-    DP = [[0] * (W + 1) for _ in range(n + 1)]
 
+    # Création d'une matrice pour stocker les résultats intermédiaires.
+    # dp[i][w] représente la valeur maximale avec les i premiers objets et une capacité w.
+    dp = [[0 for _ in range(W + 1)] for _ in range(n + 1)]
+
+    # Remplissage du tableau dp par itération sur les objets et les capacités.
     for i in range(1, n + 1):
         for w in range(1, W + 1):
-            if weights[i - 1] <= w:
-                DP[i][w] = max(DP[i - 1][w], DP[i - 1][w - weights[i - 1]] + values[i - 1])
+            # Si le poids de l'objet est supérieur à la capacité w, on ne peut pas le prendre.
+            if weights[i - 1] > w:
+                dp[i][w] = dp[i - 1][w]
             else:
-                DP[i][w] = DP[i - 1][w]
+                # Sinon, on choisit le maximum entre l'inclusion et l'exclusion de l'objet.
+                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1])
 
-    return DP[n][W]
+    # La valeur maximale se trouve dans dp[n][W].
+    max_value = dp[n][W]
 
-# Exemple d'utilisation
-values = [60, 100, 120]
-weights = [10, 20, 30]
-W = 50
-result = knapsack_bottom_up(values, weights, W)
-print("La valeur maximale dans le sac à dos est :", result)
+    # Reconstruction de la liste des objets choisis pour obtenir la valeur maximale.
+    chosen_items = []
+    i, w = n, W
+    while i > 0 and w > 0:
+        if dp[i][w] != dp[i - 1][w]:
+            chosen_items.append(i - 1)
+            w -= weights[i - 1]
+        i -= 1
+
+    return max_value, chosen_items
+
 ```
 
-**Résolution en Top-down (Récursive avec Mémoïsation) :**
-La résolution du problème du sac à dos en utilisant une approche top-down commence par une fonction récursive, mais avec une mémoïsation pour stocker les résultats intermédiaires et éviter les recalculs. Voici un exemple en Python :
+- **Complexité :**
 
-```python
-def knapsack_top_down(values, weights, W, n, memo={}):
-    if n == 0 or W == 0:
-        return 0
+    * La complexité de la méthode bottom-up est  O(n * W), où n est le nombre d'objets et W est la capacité maximale du sac à dos
 
-    if (n, W) in memo:
-        return memo[(n, W)]
 
-    if weights[n - 1] > W:
-        result = knapsack_top_down(values, weights, W, n - 1, memo)
-    else:
-        result = max(knapsack_top_down(values, weights, W, n - 1, memo),
-                     values[n - 1] + knapsack_top_down(values, weights, W - weights[n - 1], n - 1, memo))
 
-    memo[(n, W)] = result
-    return result
 
-# Exemple d'utilisation
-values = [60, 100, 120]
-weights = [10, 20, 30]
-W = 50
-n = len(values)
-result = knapsack_top_down(values, weights, W, n)
-print("La valeur maximale dans le sac à dos est :", result)
-```
 
-**Complexité :**
-La complexité de la méthode bottom-up est généralement O(n * W), où n est le nombre d'objets et W est la capacité maximale du sac à dos. La méthode top-down avec mémoïsation a une complexité similaire, mais elle peut être plus efficace dans certains cas grâce à la réutilisation des résultats intermédiaires.
 
-**Localité :**
-La programmation dynamique dans le contexte du problème du sac à dos présente une forte localité, car les solutions aux sous-problèmes sont stockées et réutilisées dans le tableau/mémoïsation, ce qui réduit considérablement la duplication des calculs. Cela contribue à améliorer l'efficacité de l'algorithme.
+
