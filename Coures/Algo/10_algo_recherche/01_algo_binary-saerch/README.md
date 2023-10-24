@@ -1,6 +1,10 @@
-L'algorithme de recherche dichotomique, également connu sous le nom de recherche binaire, est une technique efficace pour rechercher un élément spécifique dans un ensemble de données triées. Cette méthode divise répétitivement l'ensemble de données en deux moitiés et compare l'élément recherché avec l'élément au milieu. En fonction de la comparaison, l'algorithme réduit la plage de recherche de moitié à chaque itération jusqu'à ce que l'élément soit trouvé ou que la plage de recherche soit réduite à zéro.
+# cour : Binary Search 
 
-Voici comment fonctionne l'algorithme de recherche dichotomique :
+- L'algorithme de recherche dichotomique, également connu sous le nom de recherche binaire, est une technique efficace pour rechercher un élément spécifique dans un ensemble de données triées. 
+
+- Cette méthode divise répétitivement l'ensemble de données en deux moitiés et compare l'élément recherché avec l'élément au milieu. En fonction de la comparaison, l'algorithme réduit la plage de recherche de moitié à chaque itération jusqu'à ce que l'élément soit trouvé ou que la plage de recherche soit réduite à zéro.
+
+- Voici comment fonctionne l'algorithme de recherche dichotomique :
 
 1. Triez l'ensemble de données dans l'ordre croissant. La recherche dichotomique ne fonctionne que sur des données triées.
 

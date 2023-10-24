@@ -188,6 +188,28 @@ def sac_max_memo_choix_optimaux(n,V,tab_v,tab_u):
 
 ```
 
+- **Expliquation :**
+
+    - Si `n` est égal à 0 (c'est-à-dire aucun objet disponible), alors la valeur maximale est 0 et aucun objet n'est choisi.
+    
+    - Sinon, l'algorithme vérifie si les résultats pour la paire `(n, V)` ont déjà été calculés en vérifiant si elle est présente dans `memo`.
+    
+    - Si les résultats sont déjà dans `memo`, l'algorithme les récupère directement.
+    
+    - Si le volume de l'objet `n-1` est inférieur ou égal à la capacité restante `V`, alors l'algorithme explore deux options :
+        
+        - L'objet `n-1` est choisi : il appelle récursivement `sac_max` avec `n-1` objets et une capacité réduite de `tab_v[n-1]` et met à jour `val_max` et `choix` en conséquence.
+        
+        - L'objet `n-1` n'est pas choisi : il appelle récursivement `sac_max` avec `n-1` objets et la même capacité `V`, puis met à jour `val_max` et `choix` en conséquence.
+        
+    - Si le volume de l'objet `n-1` est supérieur à la capacité restante `V`, alors l'algorithme appelle récursivement `sac_max` avec `n-1` objets et la même capacité `V`, sans choisir l'objet `n-1`.
+    
+    - Une fois que les résultats optimaux pour `(n, V)` ont été déterminés, ils sont stockés dans `memo` et renvoyés.
+    
+    - En fin de compte, l'algorithme renvoie la valeur maximale que l'on peut obtenir et la liste des indices des objets choisis pour atteindre cette valeur maximale.
+
+
+
 #### Méthode 2 :
 
 ```python
@@ -255,6 +277,36 @@ def sacmax_memo_choix_optimaux(n,V,tab_v,tab_u):
     return choix
 
 ```
+
+- **Expliquation :** 
+
+
+
+- L'algorithme utilise une matrice `memo` de dimensions `(n, V)` pour stocker les résultats des sous-problèmes déjà résolus. La valeur `-1` dans `memo` indique que le résultat pour cette combinaison de `(n, V)` n'a pas encore été calculé.
+
+- L'algorithme utilise une fonction récursive `sacmax` qui prend en compte les objets disponibles, la capacité restante du sac et les choix effectués. 
+
+- La fonction suit les étapes suivantes :
+
+    1. Si le résultat pour `(n, V)` est déjà calculé et stocké dans `memo`, l'algorithme renvoie directement cette valeur, évitant ainsi un calcul inutile.
+
+    2. Si le résultat pour `(n, V)` n'est pas déjà enregistré dans `memo`, l'algorithme continue à calculer la valeur maximale (`utilité_max`) que l'on peut obtenir avec les `n` premiers objets et une capacité de sac de `V`.
+
+    3. Si `n` est égal à 0 (c'est-à-dire aucun objet disponible), la `utilité_max` est de 0.
+
+    4. Si le volume de l'objet `n-1` est inférieur ou égal à la capacité restante `V`, l'algorithme explore deux options :
+    - L'objet `n-1` est choisi : il appelle récursivement `sacmax` avec `n-1` objets et une capacité réduite de `tab_v[n-1]`, puis met à jour `utilité_max` en conséquence.
+    - L'objet `n-1` n'est pas choisi : il appelle récursivement `sacmax` avec `n-1` objets et la même capacité `V`, puis met à jour `utilité_max` en conséquence.
+
+    5. Si le volume de l'objet `n-1` est supérieur à la capacité restante `V`, l'algorithme appelle récursivement `sacmax` avec `n-1` objets et la même capacité `V`, sans choisir l'objet `n-1`.
+
+    6. Une fois que `utilité_max` est calculée, elle est stockée dans `memo` pour éviter de recalculer la même valeur.
+
+    7. En fin de compte, l'algorithme renvoie la `utilité_max` maximale que l'on peut obtenir en choisissant les objets dans le sac.
+
+    8. Après avoir appelé la fonction `sacmax(n, V, tab_v, tab_u)`, l'algorithme reconstruit la liste des objets choisis pour obtenir la valeur maximale. Cela se fait en parcourant `memo` de bas en haut et de droite à gauche, en vérifiant si la valeur actuelle diffère de la valeur immédiatement supérieure dans `memo`. Si c'est le cas, cela signifie que l'objet correspondant a été choisi, et son indice est ajouté à la liste `choix`.
+
+
 
 - **Complexité :**
 
