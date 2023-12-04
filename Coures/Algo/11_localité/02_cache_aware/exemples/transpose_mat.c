@@ -2,9 +2,9 @@
 
 
 
-#define n 100
+#define n 10
 
-#define K 5
+#define K 2
 
 void affichage(int mat[n][n]);
 
