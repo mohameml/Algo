@@ -157,7 +157,6 @@ def distance_levenshtein(seq1 , seq2):
 ```
 
 
-## 5. calcul distance de levenshtein par la Programmation dynamique :
 
 
 
