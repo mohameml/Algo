@@ -23,6 +23,7 @@ Output attendu :
 """
 
 from typing import Dict, List, Optional
+from collections import deque
 
 Graph = Dict[int, List[int]]
 
@@ -40,9 +41,27 @@ def shortest_path_bfs(graph: Graph, start: int, end: int) -> Optional[List[int]]
     
     Complexité: O(V + E)
     """
-    # TODO: Implémenter1
-    pass
 
+    if start == end : 
+        return [start]
+    
+    queue = deque([(start ,[start])])
+    visited = set([start])
+
+    while queue : 
+        node ,path  = queue.popleft()
+
+        for neighbor in graph[node] : 
+            if neighbor not in visited : 
+                visited.add(neighbor)
+                new_path = path + [neighbor]
+
+                if neighbor == end : 
+                    return new_path 
+            
+                queue.append((neighbor ,new_path))
+
+    return None 
 
 # Tests
 graph = {

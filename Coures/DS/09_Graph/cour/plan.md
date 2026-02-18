@@ -1,5 +1,3 @@
-Excellent ! Créons ensemble un plan de cours complet sur les **Graphes** avant de passer aux exercices LeetCode.
-
 ## **Plan du cours sur les Graphes**
 
 ### **Module 1 : Fondamentaux**
@@ -96,23 +94,3 @@ Excellent ! Créons ensemble un plan de cours complet sur les **Graphes** avant 
     - Définitions
     - Algorithme de Tarjan
     - Applications (points critiques dans un réseau)
-
----
-
-## **Voulez-vous qu'on commence par quel module ?**
-
-Je vous suggère de commencer par le **Module 1** (Fondamentaux), mais dites-moi si vous préférez :
-
-- Commencer par le début (Module 1)
-- Sauter directement à un module spécifique
-- Ajouter/modifier des sujets dans le plan
-
-On peut discuter chaque topic en détail avec :
-
-- Explications théoriques
-- Exemples visuels
-- Code Python
-- Analyse de complexité
-- Cas d'usage
-
-Qu'en pensez-vous ? 🚀

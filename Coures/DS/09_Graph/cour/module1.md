@@ -27,11 +27,9 @@ Un **graphe** est une structure mathématique utilisée pour modéliser des rela
 | **Cycle**           | Chemin qui revient au sommet de départ           | A → B → C → A                       |
 | **Graphe connexe**  | Il existe un chemin entre toute paire de sommets | Tous les sommets sont "reliés"      |
 
----
-
 ## **2. Types de graphes**
 
-### **a) Graphe non-dirigé (Undirected Graph)**
+### **a. Graphe non-dirigé (Undirected Graph)**
 
 Les arêtes n'ont **pas de direction**. Si A est connecté à B, alors B est connecté à A.
 
@@ -48,7 +46,7 @@ Les arêtes n'ont **pas de direction**. Si A est connecté à B, alors B est con
 - Routes entre villes (on peut aller dans les deux sens)
 - Réseau électrique
 
-### **b) Graphe dirigé (Directed Graph / Digraph)**
+### **b. Graphe dirigé (Directed Graph / Digraph)**
 
 Les arêtes ont une **direction** (représentées par des flèches).
 
@@ -70,7 +68,7 @@ Les arêtes ont une **direction** (représentées par des flèches).
 - **Degré entrant (in-degree)** : nombre d'arêtes entrantes
 - **Degré sortant (out-degree)** : nombre d'arêtes sortantes
 
-### **c) Graphe pondéré (Weighted Graph)**
+### **c. Graphe pondéré (Weighted Graph)**
 
 Chaque arête a un **poids/coût** associé.
 
@@ -88,11 +86,11 @@ Chaque arête a un **poids/coût** associé.
 - Coût de transport
 - Temps de trajet
 
-### **d) Graphe non-pondéré**
+### **d. Graphe non-pondéré**
 
 Toutes les arêtes ont le même poids (souvent considéré comme 1).
 
-### **e) Graphe cyclique vs Acyclique**
+### **e. Graphe cyclique vs Acyclique**
 
 - **Cyclique** : Contient au moins un cycle
 - **Acyclique** : Ne contient aucun cycle
@@ -105,7 +103,7 @@ DAG exemple :
     C ------+
 ```
 
-### **f) Graphe complet**
+### **f. Graphe complet**
 
 Chaque sommet est connecté à **tous les autres sommets**.
 
@@ -122,7 +120,7 @@ Chaque sommet est connecté à **tous les autres sommets**.
     C ----- D
 ```
 
-### **g) Graphe biparti**
+### **g. Graphe biparti**
 
 Les sommets peuvent être divisés en **deux ensembles** où les arêtes ne connectent que des sommets de groupes différents.
 
@@ -139,7 +137,7 @@ Groupe 2:  C    D
 - Étudiants ↔ Cours
 - Employés ↔ Tâches
 
-### **h) Arbre**
+### **h. Arbre**
 
 Un graphe **connexe** et **acyclique** (cas particulier très important).
 
@@ -156,8 +154,6 @@ Un graphe **connexe** et **acyclique** (cas particulier très important).
 - n sommets ⟹ n-1 arêtes
 - Il existe un unique chemin entre toute paire de sommets
 
----
-
 ## **3. Applications réelles des graphes**
 
 | Domaine                  | Application           | Type de graphe    |
@@ -172,24 +168,13 @@ Un graphe **connexe** et **acyclique** (cas particulier très important).
 | **Recommandations**      | Produits similaires   | Graphe pondéré    |
 | **Circuits électriques** | Composants connectés  | Graphe général    |
 
----
+## **4. Représentation des graphes**
 
-## **Résumé du Module 1.1**
+> Pour travailler avec des graphes en programmation, nous devons les représenter en mémoire. Il existe **3 méthodes principales**.
 
-✅ Un graphe = (Sommets, Arêtes)  
-✅ Types principaux : dirigé/non-dirigé, pondéré/non-pondéré, cyclique/acyclique  
-✅ Vocabulaire clé : degré, chemin, cycle, connexité  
-✅ Applications partout : réseaux, navigation, dépendances, etc.
+### **A. Matrice d'adjacence (Adjacency Matrix)**
 
-## **2. Représentation des graphes**
-
-Pour travailler avec des graphes en programmation, nous devons les représenter en mémoire. Il existe **3 méthodes principales**.
-
----
-
-## **A. Matrice d'adjacence (Adjacency Matrix)**
-
-### **Principe**
+#### **Principe**
 
 Utiliser une matrice 2D de taille **n × n** (où n = nombre de sommets).
 
@@ -198,7 +183,7 @@ Utiliser une matrice 2D de taille **n × n** (où n = nombre de sommets).
 
 Pour les graphes pondérés : `matrix[i][j] = poids` de l'arête.
 
-### **Exemple visuel**
+#### **Exemple visuel**
 
 **Graphe non-dirigé :**
 
@@ -240,7 +225,7 @@ Pour les graphes pondérés : `matrix[i][j] = poids` de l'arête.
 3  | 0  0  1  0
 ```
 
-### **Implémentation en Python**
+#### **Implémentation en Python**
 
 ```python
 # Graphe non-dirigé
@@ -275,29 +260,27 @@ def add_weighted_edge(u, v, weight):
     matrix[v][u] = weight  # Si non-dirigé
 ```
 
-### **Avantages ✅**
+#### **Avantages ✅**
 
 - Vérifier si une arête existe : **O(1)** très rapide
 - Simple à comprendre et implémenter
 - Bon pour les graphes denses (beaucoup d'arêtes)
 
-### **Inconvénients ❌**
+#### **Inconvénients ❌**
 
 - Espace : **O(n²)** même si peu d'arêtes (gaspillage pour graphes creux)
 - Parcourir tous les voisins : **O(n)** (doit parcourir toute la ligne)
 - Inefficace pour graphes avec peu d'arêtes
 
----
+### **B. Liste d'adjacence (Adjacency List)**
 
-## **B. Liste d'adjacence (Adjacency List)**
-
-### **Principe**
+#### **Principe**
 
 Pour chaque sommet, maintenir une **liste de ses voisins**.
 
 - Utiliser un tableau/dictionnaire où chaque index/clé contient une liste.
 
-### **Exemple visuel**
+#### **Exemple visuel**
 
 **Graphe non-dirigé :**
 
@@ -335,7 +318,7 @@ Pour chaque sommet, maintenir une **liste de ses voisins**.
 3 → [2]
 ```
 
-### **Implémentation en Python**
+#### **Implémentation en Python**
 
 ```python
 # Méthode 1 : Liste de listes
@@ -389,23 +372,21 @@ print(dict(graph))
 # {0: [(1, 5), (2, 3)], 1: [(0, 5)], 2: [(0, 3)]}
 ```
 
-### **Avantages ✅**
+#### **Avantages ✅**
 
 - Espace : **O(V + E)** (V = sommets, E = arêtes) - très efficace pour graphes creux
 - Parcourir tous les voisins : **O(degré du sommet)** - très rapide
 - Efficace en mémoire
 - **MEILLEURE représentation dans 90% des cas**
 
-### **Inconvénients ❌**
+#### **Inconvénients ❌**
 
 - Vérifier si une arête existe : **O(degré du sommet)** (doit parcourir la liste)
 - Légèrement plus complexe à implémenter
 
----
+### **C. Edge List (Liste d'arêtes)**
 
-## **C. Edge List (Liste d'arêtes)**
-
-### **Principe**
+#### **Principe**
 
 Stocker simplement toutes les arêtes dans une liste.
 
@@ -427,20 +408,18 @@ weighted_edges = [
 ]
 ```
 
-### **Avantages ✅**
+#### **Avantages ✅**
 
 - Très simple
 - Utile pour algorithmes comme Kruskal (MST)
 - Espace : **O(E)**
 
-### **Inconvénients ❌**
+#### **Inconvénients ❌**
 
 - Trouver les voisins d'un sommet : **O(E)** (très lent)
 - Rarement utilisé seul
 
----
-
-## **3. Comparaison et choix de représentation**
+### **Comparaison et choix de représentation**
 
 | Critère                  | Matrice d'adjacence | Liste d'adjacence | Edge List |
 | ------------------------ | ------------------- | ----------------- | --------- |
@@ -453,28 +432,23 @@ weighted_edges = [
 | **Graphes creux**        | ❌ Gaspillage       | ✅ Excellent      | ✅        |
 | **LeetCode/Interviews**  | Rare                | **✅ Standard**   | Rare      |
 
-### **Quand utiliser quoi ?**
+> **Quand utiliser quoi ?**
 
-📌 **Liste d'adjacence** (90% des cas) :
+- **Liste d'adjacence** (90% des cas) :
+    - Graphes avec peu d'arêtes (graphes creux)
+    - BFS, DFS, Dijkstra
+    - La plupart des problèmes LeetCode
 
-- Graphes avec peu d'arêtes (graphes creux)
-- BFS, DFS, Dijkstra
-- La plupart des problèmes LeetCode
+- **Matrice d'adjacence** :
+    - Graphes denses (beaucoup d'arêtes)
+    - Besoin de vérifier rapidement l'existence d'arêtes
+    - Algorithmes comme Floyd-Warshall
 
-📌 **Matrice d'adjacence** :
+- **Edge List** :
+    - Algorithmes MST (Kruskal)
+    - Quand on ne parcourt pas le graphe
 
-- Graphes denses (beaucoup d'arêtes)
-- Besoin de vérifier rapidement l'existence d'arêtes
-- Algorithmes comme Floyd-Warshall
-
-📌 **Edge List** :
-
-- Algorithmes MST (Kruskal)
-- Quand on ne parcourt pas le graphe
-
----
-
-## **4. Exemples pratiques en Python**
+## **5. Exemples pratiques en Python**
 
 ### **Construire un graphe depuis des inputs LeetCode**
 
@@ -520,40 +494,7 @@ print(dict(graph))
 # {0: [(1, 10), (2, 5)], 1: [(3, 1)], 2: [(3, 2)]}
 ```
 
----
-
-## **Résumé du Module 1**
-
-✅ **3 représentations** : Matrice, Liste d'adjacence, Edge List  
-✅ **Liste d'adjacence = standard** pour la plupart des problèmes  
-✅ **Complexité** : Liste d'adjacence O(V+E) vs Matrice O(V²)  
-✅ **Python** : `defaultdict(list)` ou `[[] for _ in range(n)]`
-
----
-
-## **Exercice rapide avant de passer au Module 2** 🎯
-
-Essayez de coder ceci :
-
-**Problème :** Étant donné `n = 4` et `edges = [[0,1],[1,2],[2,3],[3,0]]`, construisez :
-
-1. Une liste d'adjacence (non-dirigé)
-2. Une matrice d'adjacence
-3. Comptez le degré de chaque sommet
-
-### RQ :
-
-## **Deux concepts différents**
-
-### **1. Matrice d'adjacence (Adjacency Matrix)**
-
-**Représentation d'un graphe**
-
-### **2. Grille 2D (Grid)**
-
-**Le graphe lui-même**
-
-Ce sont **deux choses complètement différentes** !
+## RQ : **Matrice d'adjacence (Adjacency Matrix)** vs **Grille 2D (Grid) as Graphe**
 
 ## **Type 1 : Matrice d'adjacence**
 
@@ -586,8 +527,6 @@ matrix = [
 - ✅ Valeurs : 0 ou 1 (ou poids pour graphes pondérés)
 - ✅ Nombre de sommets = **n** (nombre de lignes = nombre de colonnes)
 
----
-
 ## **Type 2 : Grille 2D (Grid/Matrix as Graph)**
 
 ### **Définition**
@@ -617,27 +556,7 @@ grid = [
 - ✅ Nombre de sommets = **rows × cols**
 - ✅ Arêtes implicites : une case peut aller vers ses **4 voisins** (haut, bas, gauche, droite)
 
----
-
-## **Comparaison visuelle**
-
-### **Matrice d'adjacence (4 sommets)**
-
-```
-Graphe:          Matrice d'adjacence:
-                      0  1  2  3
-  0 --- 1           +-----------
-  |     |        0  | 0  1  1  0
-  2 --- 3        1  | 1  0  0  1
-                 2  | 1  0  0  1
-                 3  | 0  1  1  0
-
-Nombre de sommets: 4
-```
-
----
-
-### **Grille 2D (16 sommets)**
+**Exemple :**
 
 ```
 Grille (0=libre, 1=obstacle):
@@ -661,8 +580,7 @@ Nombre de sommets: 4 × 4 = 16
 (certains bloqués par obstacles)
 ```
 
-
-## **Conversion : Grille → Graphe explicite**
+**Conversion : Grille → Graphe explicite**
 
 Pour mieux comprendre, convertissons la grille en liste d'adjacence :
 
@@ -735,112 +653,3 @@ print(graph)
     15: [14]            # (3,3) connecté à (3,2)
 }
 ```
-
-**Mapping :**
-
-```
-Position (row, col) → Numéro de sommet
-(0, 0) → 0
-(0, 1) → 1
-(0, 2) → 2  (obstacle, pas dans le graphe)
-(0, 3) → 3
-(1, 0) → 4
-(1, 1) → 5  (obstacle, pas dans le graphe)
-...
-(3, 3) → 15
-```
-
----
-
-## **Formule de conversion**
-
-```python
-# Position vers numéro de sommet
-vertex_number = row * cols + col
-
-# Numéro de sommet vers position
-row = vertex_number // cols
-col = vertex_number % cols
-```
-
-**Exemples :**
-
-```python
-# Grid 4x4
-cols = 4
-
-(0, 0) → 0 * 4 + 0 = 0
-(0, 1) → 0 * 4 + 1 = 1
-(1, 0) → 1 * 4 + 0 = 4
-(2, 3) → 2 * 4 + 3 = 11
-(3, 3) → 3 * 4 + 3 = 15
-```
-
----
-
-## **Résumé de la différence**
-
-| Aspect           | Matrice d'adjacence         | Grille 2D                                   |
-| ---------------- | --------------------------- | ------------------------------------------- |
-| **Rôle**         | **Représente** un graphe    | **EST** le graphe                           |
-| **Taille**       | n × n (carré obligatoire)   | rows × cols (peut être rectangulaire)       |
-| **Sommets**      | n sommets fixes             | rows × cols sommets                         |
-| **matrix[i][j]** | Arête existe entre i et j ? | Case (i,j) est accessible ?                 |
-| **Valeurs**      | 0/1 ou poids                | 0 (libre), 1 (obstacle), etc.               |
-| **Voisins**      | Définis par la matrice      | Toujours 4 voisins (haut/bas/gauche/droite) |
-
----
-
-## **Exemple complet**
-
-### **Graphe avec 4 sommets**
-
-```python
-# MATRICE D'ADJACENCE
-# Représente ce graphe: 0--1--2--3
-
-adj_matrix = [
-    [0, 1, 0, 0],  # 0 connecté à 1
-    [1, 0, 1, 0],  # 1 connecté à 0 et 2
-    [0, 1, 0, 1],  # 2 connecté à 1 et 3
-    [0, 0, 1, 0]   # 3 connecté à 2
-]
-
-# 4 sommets (numérotés 0, 1, 2, 3)
-```
-
-### **Grille avec 16 sommets**
-
-```python
-# GRILLE 2D
-# Chaque case est un sommet
-
-grid = [
-    [0, 0, 0, 0],  # 4 sommets: (0,0), (0,1), (0,2), (0,3)
-    [0, 0, 0, 0],  # 4 sommets: (1,0), (1,1), (1,2), (1,3)
-    [0, 0, 0, 0],  # 4 sommets: (2,0), (2,1), (2,2), (2,3)
-    [0, 0, 0, 0]   # 4 sommets: (3,0), (3,1), (3,2), (3,3)
-]
-
-# 16 sommets au total !
-# Chaque sommet (i,j) peut aller vers (i±1,j) et (i,j±1)
-```
-
----
-
-## **Pourquoi la confusion ?**
-
-Les deux utilisent des matrices, mais :
-
-- **Matrice d'adjacence** : outil de **représentation** d'un graphe abstrait
-- **Grille** : le graphe **lui-même** est spatial/géométrique
-
----
-
-**C'est plus clair maintenant ?** 🎯
-
-Voulez-vous qu'on :
-
-1. Continue avec **DFS** ?
-2. Voie plus d'exemples de **conversion grille → graphe** ?
-3. Fasse des **exercices** pour bien différencier les deux ?
