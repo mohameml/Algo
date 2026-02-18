@@ -1,5 +1,3 @@
-# Algo
-
 - Algo :
     - Introduction
     - Complexity

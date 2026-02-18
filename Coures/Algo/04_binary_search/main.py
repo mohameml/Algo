@@ -36,7 +36,7 @@ def binary_search_general(
 
     while left <= right : 
         
-        mid = left + right // 2     
+        mid = (left + right) // 2     
 
         if phi(nums[mid]) <= C : 
             res = mid 
