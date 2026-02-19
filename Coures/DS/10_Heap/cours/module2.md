@@ -290,11 +290,7 @@ print(h2.to_sorted_list())   # [1, 2, 3, 4, 7, 8, 9]
 Si tu swappes avec le plus grand, tu crées une violation entre les deux enfants. Le plus petit enfant doit remonter pour que le parent reste ≤ aux deux enfants.
 
 **Pourquoi heapify_up ET heapify_down dans delete ?**
-Quand tu mets le dernier élément à la place du nœud supprimé, le nouvel élément peut être soit trop petit (viole avec le parent → heapify_up), soit trop grand (viole avec les enfants → heapify_down). Une seule des deux fonctions fera réellement quelque chose.
+Quand tu mets le dernier élément à la place du noeud supprimé, le nouvel élément peut être soit trop petit (viole avec le parent → heapify_up), soit trop grand (viole avec les enfants → heapify_down). Une seule des deux fonctions fera réellement quelque chose.
 
 **Pourquoi from_list commence à `(n-2)//2` et non `n//2 - 1` ?**
 Les deux formules sont équivalentes : `(n-2)//2 == n//2 - 1` pour n pair. Pour n impair, `(n-2)//2` est plus précis. On les utilise indifféremment en pratique.
-
----
-
-On passe au **Max-Heap** et au **Heap générique avec comparateur custom** ?
