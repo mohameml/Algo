@@ -52,6 +52,32 @@ def find_first_occur_negative_number(nums : list[int] ) -> int :
     return l 
 
 
+
+
+def lower_bound(nums : list[int] , target : int) -> int : 
+    """Find the first index such as nums[index] >= target"""
+    l,r = 0 , len(nums)
+    while l < r : 
+        mid = (l +r) // 2 
+        if nums[mid] < target : 
+            l = mid + 1 
+        else : 
+            r = mid 
+    return l 
+
+def upper_bound(nums :list[int] , target : int) -> int : 
+    l,r = 0 , len(nums)
+    while l < r : 
+        mid = (l  + r) //2 
+        if nums[mid] <= target : 
+            l = mid +1  
+        else : 
+            r = mid 
+    return l 
+
+
+
+
 if __name__ == "__main__" : 
 
 
