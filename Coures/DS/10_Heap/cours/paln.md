@@ -13,15 +13,29 @@
     - `insert` + `heapify_up`
     - `extract_min` + `heapify_down`
     - `peek`, `size`, `is_empty`
-2. **Max-Heap** (adaptation)
-3. **Heap générique** avec comparateur custom
-4. **Build Heap** from array — Floyd's algorithm O(n)
-5. **Heap Sort** from scratch
-6. **K-ary Heap** (ternaire, etc.)
-7. **Min-Max Heap** (double-ended)
-8. **Indexed Priority Queue** (update/decrease-key) → crucial pour Dijkstra
+    - **Build Heap** from array — Floyd's algorithm O(n)
+    - **Heap Sort** from scratch
+2. **Heap générique** avec comparateur custom
+3. **K-ary Heap** (ternaire, etc.)
+4. **Min-Max Heap** (double-ended)
 
-### Module 3 — Patterns d'Interview (les 6 patterns fondamentaux)
+### Module 3 - heapq module in python :
+
+1. Introduction & Philosophie
+2. Les 8 Fonctions Fondamentales
+3. Simuler un Max-Heap
+4. Heap de Tuples & Objets Custom
+5. Patterns Idiomatiques Python
+6. Complexités & Comparaison
+
+## Module : Patterns
+
+### Module 4 : PQ
+
+- **PQ**
+- **Indexed Priority Queue** (update/decrease-key) → crucial pour Dijkstra
+
+### Module 4 — Patterns d'Interview (les 6 patterns fondamentaux)
 
 | #   | Pattern                   | Description                       |
 | --- | ------------------------- | --------------------------------- |
@@ -32,7 +46,7 @@
 | 5   | **Greedy + Heap**         | Scheduling, tasks, meetings       |
 | 6   | **Graph + Heap**          | Dijkstra, Prim's MST              |
 
-### Module 4 — Problèmes Classiques par Pattern
+### Module 5 — Problèmes Classiques par Pattern
 
 **Pattern 1 : Top K Elements**
 
@@ -72,7 +86,7 @@
 - Swim in Rising Water (LC 778)
 - Prim's MST (LC 1584)
 
-### Module 5 — Variantes Avancées
+### Module 6 — Variantes Avancées
 
 1. **Lazy Deletion** (marquer éléments supprimés sans restructurer)
 2. **Fibonacci Heap** (théorie — Dijkstra optimal O(E + V log V))
@@ -80,7 +94,7 @@
 4. **Median Maintenance** structure complète
 5. **Priority Queue avec mise à jour de clé**
 
-### Module 6 — Questions Quant/BNP Style
+### Module 7 — Questions Quant/BNP Style
 
 - Ordre de complexité des opérations (pourquoi build est O(n) et pas O(n log n) ?)
 - Différence Heap vs BST vs Sorted Array
