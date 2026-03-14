@@ -1,5 +1,5 @@
 """
-Exo 4 : Remove Duplicates from Sorted Array
+Exo 3 : Remove Duplicates from Sorted Array
 ---------------------------------
 Étant donné un tableau trié nums, supprimer les doublons in-place
 et retourner le nouveau nombre d'éléments uniques.
@@ -9,10 +9,6 @@ Examples :
 ---------------
 nums = [1, 1, 2] => 2, nums[:2] = [1, 2]
 nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4] => 5, nums[:5] = [0, 1, 2, 3, 4]
-
-----
-times : 0
-last_date :
 """
 
 from typing import List

@@ -13,15 +13,21 @@ nums = [3, 2, 4], target = 6 => [1, 2]
 nums = [3, 3], target = 6 => [0, 1]
 
 ----
-times : 0
-last_date :
+times : 1
+last_date : 14/03/2026
 """
 
 from typing import List
 
 
 def two_sum(nums: List[int], target: int) -> List[int]:
-    ...
+    seen = {}
+    for idx , num in enumerate(nums) :
+        last = target - num
+        if last in seen : 
+            return [seen[last] , idx]
+        seen[num] = idx 
+    raise ValueError("no solution found")
 
 
 if __name__ == "__main__":

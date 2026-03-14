@@ -10,9 +10,7 @@ nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4] => 6 (sous-tableau [4, -1, 2, 1])
 nums = [1] => 1
 nums = [-1, -2, -3] => -1
 
-----
-times : 0
-last_date :
+
 """
 
 from typing import List

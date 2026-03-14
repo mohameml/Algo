@@ -1,5 +1,5 @@
 """
-Exo 4 : Remove Duplicates from Sorted Array
+Exo 3 : Remove Duplicates from Sorted Array
 ---------------------------------
 Étant donné un tableau trié nums, supprimer les doublons in-place
 et retourner le nouveau nombre d'éléments uniques.
@@ -11,15 +11,22 @@ nums = [1, 1, 2] => 2, nums[:2] = [1, 2]
 nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4] => 5, nums[:5] = [0, 1, 2, 3, 4]
 
 ----
-times : 0
-last_date :
+times : 1
+last_date : 14/03/2026
 """
 
 from typing import List
 
 
 def remove_duplicates(nums: List[int]) -> int:
-    ...
+    if len(nums) == 1 : 
+        return 1 
+    write = 0 
+    for read in range(len(nums)) :
+        if nums[read] != nums[read - 1] : 
+            nums[write] = nums[read]
+            write += 1 
+    return write
 
 
 if __name__ == "__main__":

@@ -10,9 +10,7 @@ Examples :
 prices = [7, 1, 5, 3, 6, 4] => 5 (acheter à 1, vendre à 6)
 prices = [7, 6, 4, 3, 1] => 0 (prix décroissant, aucun profit)
 
-----
-times : 0
-last_date :
+
 """
 
 from typing import List
